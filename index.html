@@ -9,16 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
+        html, body {
+            height: 100%;
             font-family: 'Inter', sans-serif;
-            min-height: 100vh;
+            background: radial-gradient(ellipse at 50% 80%, #4a1500 0%, #1a0500 100%);
+            position: relative;
+            overflow: auto; /* Дозволяємо скрол, якщо потрібно */
+        }
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background: radial-gradient(ellipse at 50% 80%, #4a1500 0%, #1a0500 100%);
-            position: relative;
-            overflow: hidden;
         }
 
         .fire-icons {
@@ -75,13 +77,14 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            min-height: 580px;
+            min-height: 95vh; /* Фонова картинка розтягується на всю висоту екрана */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        .avatar-placeholder { height: 90px; flex-shrink: 0; }
+
+        .avatar-placeholder { height: 60px; flex-shrink: 0; }
 
         .fire-text {
             font-size: 38px;
@@ -100,6 +103,7 @@
             0% { text-shadow: 0 0 30px rgba(255, 80, 30, 0.3), 0 0 60px rgba(255, 50, 0, 0.1); }
             100% { text-shadow: 0 0 50px rgba(255, 80, 30, 0.6), 0 0 100px rgba(255, 50, 0, 0.3); }
         }
+
         .sub {
             font-family: 'Courier New', monospace;
             font-size: 18px;
@@ -110,6 +114,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
+
         .divider {
             display: flex;
             align-items: center;
@@ -121,52 +126,15 @@
         .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(255, 100, 50, 0.5), transparent); }
         .divider-icon { font-size: 18px; opacity: 0.7; color: #ff6633; filter: drop-shadow(0 0 10px rgba(255, 80, 30, 0.3)); }
 
-        .email-wrapper {
+        /* ===== КНОПКИ ===== */
+        .btn-group {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 24px;
-            cursor: pointer;
-            position: relative;
+            gap: 10px;
             width: 100%;
+            margin-top: 8px;
         }
-        .email {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffffff;
-            user-select: none;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(255, 200, 100, 0.2), 0 0 0 2px #ffaa00;
-            -webkit-text-stroke: 1px rgba(255, 170, 0, 0.7);
-            display: inline-block;
-            padding-bottom: 4px;
-            text-transform: uppercase;
-            transition: 0.3s;
-            text-align: center;
-        }
-        .email-wrapper:hover .email { color: #ffcc88; text-shadow: 0 0 30px rgba(255, 200, 100, 0.4), 0 0 0 2px #ffaa00; }
-
-        .toast-email {
-            font-size: 14px;
-            font-weight: 600;
-            color: #ffaa00;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
-            padding: 6px 16px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 170, 0, 0.3);
-            box-shadow: 0 0 30px rgba(255, 170, 0, 0.15);
-            opacity: 0;
-            transform: scale(0.8) translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
-            white-space: nowrap;
-            font-family: 'Inter', sans-serif;
-        }
-        .toast-email.show { opacity: 1; transform: scale(1) translateY(0); }
 
         .btn {
             display: inline-block;
@@ -177,7 +145,6 @@
             font-weight: 700;
             font-size: 18px;
             letter-spacing: 2px;
-            color: #ff8844;
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(2px);
             border: 1px solid rgba(255, 100, 50, 0.25);
@@ -185,8 +152,10 @@
             text-shadow: 0 0 20px rgba(255, 80, 30, 0.2);
             box-shadow: inset 0 0 30px rgba(255, 80, 30, 0.05);
             text-transform: uppercase;
-            margin-top: 8px;
             width: auto;
+            min-width: 160px;
+            text-align: center;
+            color: #ff8844;
         }
         .btn:hover {
             background: rgba(255, 80, 30, 0.2);
@@ -196,31 +165,106 @@
             color: #ffaa66;
         }
 
-        /* ===== СПЕЦІАЛЬНА КНОПКА ТЕЛЕГРАМ (КОЛІР ЯК EMAIL) ===== */
-        .tg-btn {
+        .spacer { height: 12px; width: 100%; }
+
+        .btn-tg {
             color: #ffffff;
             text-shadow: 0 0 20px rgba(255, 200, 100, 0.2), 0 0 0 2px #ffaa00;
             -webkit-text-stroke: 1px rgba(255, 170, 0, 0.7);
             border-color: rgba(255, 170, 0, 0.3);
         }
-        .tg-btn:hover {
+        .btn-tg:hover {
             color: #ffcc88;
             background: rgba(255, 170, 0, 0.1);
             border-color: #ffaa00;
             box-shadow: 0 0 40px rgba(255, 170, 0, 0.2), inset 0 0 40px rgba(255, 170, 0, 0.1);
         }
 
+        .email-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn-email {
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 200, 100, 0.2), 0 0 0 2px #ffaa00;
+            -webkit-text-stroke: 1px rgba(255, 170, 0, 0.7);
+            border-color: rgba(255, 170, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 170, 0, 0.3);
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            min-width: 160px;
+            text-align: center;
+        }
+        .btn-email:hover {
+            color: #ffcc88;
+            background: rgba(255, 170, 0, 0.1);
+            border-color: #ffaa00;
+            box-shadow: 0 0 40px rgba(255, 170, 0, 0.2), inset 0 0 40px rgba(255, 170, 0, 0.1);
+        }
+
+        .copy-toast {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffaa00;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 6px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 170, 0, 0.3);
+            box-shadow: 0 0 40px rgba(255, 170, 0, 0.2);
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            font-family: 'Inter', sans-serif;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .copy-toast.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .btn-paypal {
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            -webkit-text-stroke: 0px;
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .btn-paypal:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+
         @media (max-width: 480px) {
-            .card { padding: 30px 18px 22px; border-radius: 32px; min-height: 500px; }
+            .card {
+                padding: 30px 18px 22px;
+                border-radius: 32px;
+                min-height: 95vh; /* І на мобільному на всю висоту */
+            }
             .fire-text { font-size: 30px; }
             .sub { font-size: 15px; }
-            .email { font-size: 18px; }
-            .btn { padding: 12px 24px; font-size: 16px; }
-            .avatar-placeholder { height: 60px; }
+            .btn, .btn-email { padding: 12px 24px; font-size: 16px; min-width: 140px; }
+            .avatar-placeholder { height: 40px; }
             .fire-icon { font-size: 22px; }
             .fire-icon:nth-child(2) { font-size: 28px; }
             .fire-icon:nth-child(5) { font-size: 28px; }
-            .toast-email { font-size: 12px; padding: 4px 12px; }
+            .copy-toast { font-size: 15px; padding: 4px 14px; }
         }
     </style>
 </head>
@@ -249,19 +293,28 @@
             <span class="divider-icon">✦</span>
             <span class="divider-line"></span>
         </div>
-        <div class="email-wrapper" id="emailWrapper">
-            <span class="email" id="email">Email</span>
-            <span class="toast-email" id="toastEmail">📋 Copied!</span>
-        </div>
 
-        <a href="https://docs.google.com/spreadsheets/d/1b8wUNhlKo8arsSiXPvMlN1110AHAv5og/edit?usp=sharing" class="btn" target="_blank">View Catalog</a>
-        <a href="https://t.me/Gannibal2009" class="btn tg-btn" target="_blank">My Telegram</a>
+        <div class="btn-group">
+            <a href="https://docs.google.com/spreadsheets/d/1b8wUNhlKo8arsSiXPvMlN1110AHAv5og/edit?usp=sharing" class="btn" target="_blank">View Catalog</a>
+
+            <div class="spacer"></div>
+
+            <a href="https://t.me/Gannibal2009" class="btn btn-tg" target="_blank">My Telegram</a>
+
+            <div class="email-wrapper">
+                <button class="btn-email" id="emailBtn">Email</button>
+                <span class="copy-toast" id="emailToast">📋 Copied!</span>
+            </div>
+
+            <a href="https://paypal.me/gannibal2025" class="btn btn-paypal" target="_blank">PayPal</a>
+        </div>
     </div>
 
     <script>
-        document.getElementById('emailWrapper').addEventListener('click', function() {
+        document.getElementById('emailBtn').addEventListener('click', function(e) {
             const email = 'rammsteinthebest2015@gmail.com';
-            const toast = document.getElementById('toastEmail');
+            const toast = document.getElementById('emailToast');
+
             navigator.clipboard.writeText(email).then(() => {
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 2000);
@@ -277,5 +330,6 @@
             });
         });
     </script>
+
 </body>
 </html>
