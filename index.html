@@ -236,7 +236,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* ===== КНОПКА PAYPAL ===== */
         .paypal-wrapper {
             display: flex;
             flex-direction: column;
@@ -271,7 +270,6 @@
             box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
         }
 
-        /* ===== ПОВІДОМЛЕННЯ ДЛЯ PAYPAL ===== */
         .paypal-toast {
             position: fixed;
             top: 50%;
@@ -370,7 +368,8 @@
         </div>
 
         <div class="btn-group">
-            <a href="https://docs.google.com/spreadsheets/d/1b8wUNhlKo8arsSiXPvMlN1110AHAv5og/edit?usp=sharing" class="btn" target="_blank">View Catalog</a>
+            <!-- ===== ВИПРАВЛЕНЕ ПОСИЛАННЯ НА КАТАЛОГ ===== -->
+            <a href="https://docs.google.com/spreadsheets/d/1b8wUNhlKo8arsSiXPvMlN1110AHAv5og/preview" class="btn" target="_blank">View Catalog</a>
 
             <div class="spacer"></div>
 
@@ -383,12 +382,10 @@
 
             <div class="paypal-wrapper">
                 <button class="btn-paypal" id="paypalBtn">PayPal</button>
-                <!-- ТУТ БУДЕ ВЕЛИКЕ УВЕДОМЛЕННЯ -->
             </div>
         </div>
     </div>
 
-    <!-- ===== ВЕЛИКЕ УВЕДОМЛЕННЯ ДЛЯ PAYPAL ===== -->
     <div class="paypal-toast" id="paypalToast">
         <span class="emoji">📋</span>
         <div><span class="highlight">Copied!</span></div>
@@ -426,15 +423,12 @@
             const paypalEmail = 'gannibal2025@gmail.com';
             const toast = document.getElementById('paypalToast');
 
-            // Копіюємо email
             navigator.clipboard.writeText(paypalEmail).then(() => {
                 toast.classList.add('show');
-                // Автоматичне закриття через 10 секунд
                 setTimeout(() => {
                     toast.classList.remove('show');
                 }, 10000);
             }).catch(() => {
-                // fallback для старих браузерів
                 const textarea = document.createElement('textarea');
                 textarea.value = paypalEmail;
                 document.body.appendChild(textarea);
@@ -448,7 +442,6 @@
             });
         });
 
-        // Ручне закриття уведомлення по кнопці
         document.getElementById('closePaypalToast').addEventListener('click', function() {
             document.getElementById('paypalToast').classList.remove('show');
         });
