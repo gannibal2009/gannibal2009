@@ -14,7 +14,7 @@
             font-family: 'Inter', sans-serif;
             background: radial-gradient(ellipse at 50% 80%, #4a1500 0%, #1a0500 100%);
             position: relative;
-            overflow: auto; /* Дозволяємо скрол, якщо потрібно */
+            overflow: auto;
         }
         body {
             display: flex;
@@ -77,7 +77,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            min-height: 95vh; /* Фонова картинка розтягується на всю висоту екрана */
+            min-height: 95vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -126,7 +126,6 @@
         .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(255, 100, 50, 0.5), transparent); }
         .divider-icon { font-size: 18px; opacity: 0.7; color: #ff6633; filter: drop-shadow(0 0 10px rgba(255, 80, 30, 0.3)); }
 
-        /* ===== КНОПКИ ===== */
         .btn-group {
             display: flex;
             flex-direction: column;
@@ -217,12 +216,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.8);
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 700;
             color: #ffaa00;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
-            padding: 6px 20px;
+            padding: 6px 16px;
             border-radius: 30px;
             border: 1px solid rgba(255, 170, 0, 0.3);
             box-shadow: 0 0 40px rgba(255, 170, 0, 0.2);
@@ -237,12 +236,33 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
+        /* ===== КНОПКА PAYPAL ===== */
+        .paypal-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            width: 100%;
+        }
+
         .btn-paypal {
             color: #ffffff;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
             -webkit-text-stroke: 0px;
             border-color: rgba(255, 255, 255, 0.2);
             background: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            min-width: 160px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .btn-paypal:hover {
             color: #ffffff;
@@ -251,20 +271,75 @@
             box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
         }
 
+        /* ===== ПОВІДОМЛЕННЯ ДЛЯ PAYPAL ===== */
+        .paypal-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            max-width: 400px;
+            width: 90%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 170, 0, 0.3);
+            border-radius: 20px;
+            padding: 24px 28px;
+            box-shadow: 0 0 80px rgba(255, 170, 0, 0.15);
+            color: #ffcc88;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .paypal-toast.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+        .paypal-toast .emoji {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .paypal-toast .highlight {
+            color: #ffaa00;
+            font-weight: 700;
+        }
+        .paypal-toast .close-btn {
+            margin-top: 16px;
+            padding: 8px 24px;
+            border: 1px solid rgba(255, 170, 0, 0.2);
+            border-radius: 30px;
+            background: rgba(255, 170, 0, 0.05);
+            color: #ffcc88;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .paypal-toast .close-btn:hover {
+            background: rgba(255, 170, 0, 0.1);
+            border-color: #ffaa00;
+        }
+
         @media (max-width: 480px) {
             .card {
                 padding: 30px 18px 22px;
                 border-radius: 32px;
-                min-height: 95vh; /* І на мобільному на всю висоту */
+                min-height: 95vh;
             }
             .fire-text { font-size: 30px; }
             .sub { font-size: 15px; }
-            .btn, .btn-email { padding: 12px 24px; font-size: 16px; min-width: 140px; }
+            .btn, .btn-email, .btn-paypal { padding: 12px 24px; font-size: 16px; min-width: 140px; }
             .avatar-placeholder { height: 40px; }
             .fire-icon { font-size: 22px; }
             .fire-icon:nth-child(2) { font-size: 28px; }
             .fire-icon:nth-child(5) { font-size: 28px; }
-            .copy-toast { font-size: 15px; padding: 4px 14px; }
+            .copy-toast { font-size: 12px; padding: 4px 12px; }
+            .paypal-toast { font-size: 14px; padding: 20px; max-width: 340px; }
         }
     </style>
 </head>
@@ -306,15 +381,31 @@
                 <span class="copy-toast" id="emailToast">📋 Copied!</span>
             </div>
 
-            <a href="https://paypal.me/gannibal2025" class="btn btn-paypal" target="_blank">PayPal</a>
+            <div class="paypal-wrapper">
+                <button class="btn-paypal" id="paypalBtn">PayPal</button>
+                <!-- ТУТ БУДЕ ВЕЛИКЕ УВЕДОМЛЕННЯ -->
+            </div>
         </div>
     </div>
 
+    <!-- ===== ВЕЛИКЕ УВЕДОМЛЕННЯ ДЛЯ PAYPAL ===== -->
+    <div class="paypal-toast" id="paypalToast">
+        <span class="emoji">📋</span>
+        <div><span class="highlight">Copied!</span></div>
+        <div style="margin-top: 6px;">
+            For international transfers, use PayPal <span class="highlight">"Friends & Family"</span>
+        </div>
+        <div style="margin-top: 4px; font-size: 14px; color: rgba(255,200,100,0.7);">
+            to <span class="highlight">gannibal2025@gmail.com</span>
+        </div>
+        <button class="close-btn" id="closePaypalToast">Got it</button>
+    </div>
+
     <script>
+        // Копіювання Email
         document.getElementById('emailBtn').addEventListener('click', function(e) {
             const email = 'rammsteinthebest2015@gmail.com';
             const toast = document.getElementById('emailToast');
-
             navigator.clipboard.writeText(email).then(() => {
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 2000);
@@ -328,6 +419,38 @@
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 2000);
             });
+        });
+
+        // PayPal: копіюємо email + показуємо велике уведомлення
+        document.getElementById('paypalBtn').addEventListener('click', function(e) {
+            const paypalEmail = 'gannibal2025@gmail.com';
+            const toast = document.getElementById('paypalToast');
+
+            // Копіюємо email
+            navigator.clipboard.writeText(paypalEmail).then(() => {
+                toast.classList.add('show');
+                // Автоматичне закриття через 10 секунд
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 10000);
+            }).catch(() => {
+                // fallback для старих браузерів
+                const textarea = document.createElement('textarea');
+                textarea.value = paypalEmail;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 10000);
+            });
+        });
+
+        // Ручне закриття уведомлення по кнопці
+        document.getElementById('closePaypalToast').addEventListener('click', function() {
+            document.getElementById('paypalToast').classList.remove('show');
         });
     </script>
 
