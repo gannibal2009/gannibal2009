@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gannibal Trading • Rock Recordings</title>
     
-    <!-- ===== ВИПРАВЛЕНА ФАВІКОНКА (ГІТАРА) ===== -->
+    <!-- ===== ФАВІКОНКА (ГІТАРА) ===== -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎸%3C/text%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎸%3C/text%3E%3C/svg%3E">
     
@@ -19,9 +19,15 @@
             font-family: 'Inter', sans-serif;
             background: radial-gradient(ellipse at 50% 80%, #4a1500 0%, #1a0500 100%);
             position: relative;
-            overflow: auto;
+            overflow-y: auto; /* ДОЗВОЛЯЄМО СКРОЛ, ЯКЩО ПОТРІБНО */
+        }
+        /* ХОВАЄМО СМУГУ ПРОКРУТКИ, АЛЕ ЗАЛИШАЄМО МОЖЛИВІСТЬ СКРОЛИТИ */
+        body::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
         }
         body {
+            scrollbar-width: none; /* Firefox */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -74,7 +80,7 @@
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
             border-radius: 48px;
-            padding: 40px 28px 30px;
+            padding: 30px 24px 24px;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 0 2px rgba(255, 100, 50, 0.2);
             border: 1px solid rgba(255, 100, 50, 0.15);
             text-align: center;
@@ -82,20 +88,21 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            min-height: 85vh; /* ЗМЕНШЕНО ДО 85vh */
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            /* overflow: hidden; ПРИБРАНО, ЩОБ ГІТАРА БУЛА ВИДНА ПОВНІСТЮ */
         }
 
-        .avatar-placeholder { height: 60px; flex-shrink: 0; }
+        .avatar-placeholder { height: 40px; flex-shrink: 0; }
 
         .fire-text {
-            font-size: 38px;
+            font-size: 34px;
             font-weight: 900;
             letter-spacing: 2px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             background: linear-gradient(180deg, #ffcc66 0%, #ff6633 30%, #cc2200 70%, #661100 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -111,11 +118,11 @@
 
         .sub {
             font-family: 'Courier New', monospace;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 900;
             color: #ffffff;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 200, 50, 0.4), 0 0 0 2px #ffcc00, 0 0 0 4px #b38800, 0 0 30px rgba(255, 200, 0, 0.3);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -124,31 +131,31 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            margin: 10px 0 20px;
+            gap: 10px;
+            margin: 6px 0 12px;
             width: 100%;
         }
         .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(255, 100, 50, 0.5), transparent); }
-        .divider-icon { font-size: 18px; opacity: 0.7; color: #ff6633; filter: drop-shadow(0 0 10px rgba(255, 80, 30, 0.3)); }
+        .divider-icon { font-size: 16px; opacity: 0.7; color: #ff6633; filter: drop-shadow(0 0 10px rgba(255, 80, 30, 0.3)); }
 
         .btn-group {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
-            margin-top: 8px;
+            margin-top: 4px;
         }
 
         .btn {
             display: inline-block;
-            padding: 14px 32px;
+            padding: 12px 28px;
             border-radius: 60px;
             text-decoration: none;
             font-family: 'Courier New', monospace;
             font-weight: 700;
-            font-size: 18px;
-            letter-spacing: 2px;
+            font-size: 16px;
+            letter-spacing: 1.5px;
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(2px);
             border: 1px solid rgba(255, 100, 50, 0.25);
@@ -157,7 +164,7 @@
             box-shadow: inset 0 0 30px rgba(255, 80, 30, 0.05);
             text-transform: uppercase;
             width: auto;
-            min-width: 160px;
+            min-width: 150px;
             text-align: center;
             color: #ff8844;
         }
@@ -169,7 +176,7 @@
             color: #ffaa66;
         }
 
-        .spacer { height: 12px; width: 100%; }
+        .spacer { height: 6px; width: 100%; }
 
         .btn-tg {
             color: #ffffff;
@@ -199,14 +206,14 @@
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(2px);
             border: 1px solid rgba(255, 170, 0, 0.3);
-            padding: 14px 32px;
+            padding: 12px 28px;
             border-radius: 60px;
             font-family: 'Courier New', monospace;
             font-weight: 700;
-            font-size: 18px;
-            letter-spacing: 2px;
+            font-size: 16px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            min-width: 160px;
+            min-width: 150px;
             text-align: center;
         }
         .btn-email:hover {
@@ -226,7 +233,7 @@
             color: #ffaa00;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
-            padding: 6px 16px;
+            padding: 4px 14px;
             border-radius: 30px;
             border: 1px solid rgba(255, 170, 0, 0.3);
             box-shadow: 0 0 40px rgba(255, 170, 0, 0.2);
@@ -257,14 +264,14 @@
             background: rgba(0, 0, 0, 0.5);
             cursor: pointer;
             transition: all 0.3s ease;
-            padding: 14px 32px;
+            padding: 12px 28px;
             border-radius: 60px;
             font-family: 'Courier New', monospace;
             font-weight: 700;
-            font-size: 18px;
-            letter-spacing: 2px;
+            font-size: 16px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            min-width: 160px;
+            min-width: 150px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
@@ -329,20 +336,22 @@
         }
 
         @media (max-width: 480px) {
+            body { padding: 10px; }
             .card {
-                padding: 30px 18px 22px;
+                padding: 20px 14px 16px;
                 border-radius: 32px;
-                min-height: 85vh; /* ЗМЕНШЕНО ДО 85vh */
+                min-height: 80vh;
             }
-            .fire-text { font-size: 30px; }
-            .sub { font-size: 15px; }
-            .btn, .btn-email, .btn-paypal { padding: 12px 24px; font-size: 16px; min-width: 140px; }
-            .avatar-placeholder { height: 40px; }
-            .fire-icon { font-size: 22px; }
-            .fire-icon:nth-child(2) { font-size: 28px; }
-            .fire-icon:nth-child(5) { font-size: 28px; }
+            .fire-text { font-size: 28px; }
+            .sub { font-size: 14px; }
+            .btn, .btn-email, .btn-paypal { padding: 10px 20px; font-size: 14px; min-width: 120px; }
+            .avatar-placeholder { height: 30px; }
+            .fire-icon { font-size: 20px; }
+            .fire-icon:nth-child(2) { font-size: 24px; }
+            .fire-icon:nth-child(5) { font-size: 24px; }
             .copy-toast { font-size: 12px; padding: 4px 12px; }
             .paypal-toast { font-size: 14px; padding: 20px; max-width: 340px; }
+            .btn-group { gap: 6px; }
         }
     </style>
 </head>
@@ -403,7 +412,6 @@
     </div>
 
     <script>
-        // Копіювання Email
         document.getElementById('emailBtn').addEventListener('click', function(e) {
             const email = 'rammsteinthebest2015@gmail.com';
             const toast = document.getElementById('emailToast');
@@ -422,7 +430,6 @@
             });
         });
 
-        // PayPal: копіюємо email + показуємо велике уведомлення
         document.getElementById('paypalBtn').addEventListener('click', function(e) {
             const paypalEmail = 'gannibal2025@gmail.com';
             const toast = document.getElementById('paypalToast');
