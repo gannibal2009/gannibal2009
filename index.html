@@ -71,7 +71,6 @@
             100% { transform: translate(-5px, -60px) rotate(-3deg) scale(0.95); opacity: 0.4; }
         }
 
-        /* ===== КАРТКА ===== */
         .card {
             position: relative;
             z-index: 2;
@@ -89,19 +88,19 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Важливо, щоб відео не виходило за заокруглені кути */
+            overflow: hidden;
         }
 
-        /* ===== ФОНОВЕ ВІДЕО ===== */
+        /* ===== ВІДЕО (ТЕПЕР CONTAIN) ===== */
         #bgVideo {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Відео заповнює всю картку */
-            z-index: -1; /* Позаду всього контенту */
-            border-radius: 48px; /* Підлаштовується під картку */
+            object-fit: contain; /* ГІТАРА ВИДНА ПОВНІСТЮ */
+            z-index: -1;
+            border-radius: 48px;
         }
 
         .avatar-placeholder { height: 40px; flex-shrink: 0; }
@@ -307,10 +306,8 @@
         <div class="fire-icon">🔥</div>
     </div>
 
-    <!-- ===== КАРТКА ===== -->
     <div class="card">
-
-        <!-- ===== ФОНОВЕ ВІДЕО (ЗАМІСТЬ КАРТИНКИ) ===== -->
+        <!-- ФОНОВЕ ВІДЕО -->
         <video autoplay muted loop playsinline id="bgVideo">
             <source src="fire-guitar.mp4" type="video/mp4">
             Ваш браузер не підтримує фонове відео.
