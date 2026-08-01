@@ -246,40 +246,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        .paypal-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            width: 100%;
-        }
-
-        .btn-paypal {
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            -webkit-text-stroke: 0px;
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 12px 28px;
-            border-radius: 60px;
-            font-family: 'Courier New', monospace;
-            font-weight: 700;
-            font-size: 16px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            min-width: 150px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .btn-paypal:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
-        }
-
         /* ===== НОВА КНОПКА YOUTUBE ===== */
         .btn-yt {
             color: #ffffff;
@@ -294,59 +260,6 @@
             box-shadow: 0 0 40px rgba(255, 0, 0, 0.2), inset 0 0 40px rgba(255, 0, 0, 0.1);
         }
 
-        .paypal-toast {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            max-width: 400px;
-            width: 90%;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 170, 0, 0.3);
-            border-radius: 20px;
-            padding: 24px 28px;
-            box-shadow: 0 0 80px rgba(255, 170, 0, 0.15);
-            color: #ffcc88;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
-            text-align: center;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 999;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .paypal-toast.show {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-            pointer-events: auto;
-        }
-        .paypal-toast .emoji {
-            font-size: 28px;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .paypal-toast .highlight {
-            color: #ffaa00;
-            font-weight: 700;
-        }
-        .paypal-toast .close-btn {
-            margin-top: 16px;
-            padding: 8px 24px;
-            border: 1px solid rgba(255, 170, 0, 0.2);
-            border-radius: 30px;
-            background: rgba(255, 170, 0, 0.05);
-            color: #ffcc88;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-        .paypal-toast .close-btn:hover {
-            background: rgba(255, 170, 0, 0.1);
-            border-color: #ffaa00;
-        }
-
         @media (max-width: 480px) {
             body { padding: 10px; }
             .card {
@@ -356,13 +269,12 @@
             }
             .fire-text { font-size: 28px; }
             .sub { font-size: 14px; }
-            .btn, .btn-email, .btn-paypal, .btn-yt { padding: 10px 20px; font-size: 14px; min-width: 120px; }
+            .btn, .btn-email, .btn-yt { padding: 10px 20px; font-size: 14px; min-width: 120px; }
             .avatar-placeholder { height: 30px; }
             .fire-icon { font-size: 20px; }
             .fire-icon:nth-child(2) { font-size: 24px; }
             .fire-icon:nth-child(5) { font-size: 24px; }
             .copy-toast { font-size: 12px; padding: 4px 12px; }
-            .paypal-toast { font-size: 14px; padding: 20px; max-width: 340px; }
             .btn-group { gap: 6px; }
         }
     </style>
@@ -394,36 +306,24 @@
         </div>
 
         <div class="btn-group">
+            <!-- КНОПКА КАТАЛОГ -->
             <a href="https://docs.google.com/spreadsheets/d/1b8wUNhlKo8arsSiXPvMlN1110AHAv5og/preview" class="btn" target="_blank">View Catalog</a>
 
-            <!-- ===== НОВА КНОПКА YOUTUBE ===== -->
-            <a href="https://www.youtube.com/@gannibal2009" class="btn btn-yt" target="_blank">My YouTube</a>
+            <!-- КНОПКА YOUTUBE -->
+            <a href="https://www.youtube.com/@gannibal2009" class="btn btn-yt" target="_blank">YouTube</a>
 
             <div class="spacer"></div>
 
+            <!-- КНОПКА TELEGRAM -->
             <a href="https://t.me/Gannibal2009" class="btn btn-tg" target="_blank">My Telegram</a>
 
+            <!-- КНОПКА EMAIL -->
             <div class="email-wrapper">
                 <button class="btn-email" id="emailBtn">Email</button>
                 <span class="copy-toast" id="emailToast">📋 Copied!</span>
             </div>
 
-            <div class="paypal-wrapper">
-                <button class="btn-paypal" id="paypalBtn">PayPal</button>
-            </div>
         </div>
-    </div>
-
-    <div class="paypal-toast" id="paypalToast">
-        <span class="emoji">📋</span>
-        <div><span class="highlight">Copied!</span></div>
-        <div style="margin-top: 6px;">
-            For international transfers, use PayPal <span class="highlight">"Friends & Family"</span>
-        </div>
-        <div style="margin-top: 4px; font-size: 14px; color: rgba(255,200,100,0.7);">
-            to <span class="highlight">gannibal2025@gmail.com</span>
-        </div>
-        <button class="close-btn" id="closePaypalToast">Got it</button>
     </div>
 
     <script>
@@ -443,33 +343,6 @@
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 2000);
             });
-        });
-
-        document.getElementById('paypalBtn').addEventListener('click', function(e) {
-            const paypalEmail = 'gannibal2025@gmail.com';
-            const toast = document.getElementById('paypalToast');
-
-            navigator.clipboard.writeText(paypalEmail).then(() => {
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 10000);
-            }).catch(() => {
-                const textarea = document.createElement('textarea');
-                textarea.value = paypalEmail;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 10000);
-            });
-        });
-
-        document.getElementById('closePaypalToast').addEventListener('click', function() {
-            document.getElementById('paypalToast').classList.remove('show');
         });
     </script>
 
