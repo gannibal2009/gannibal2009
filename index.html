@@ -71,27 +71,37 @@
             100% { transform: translate(-5px, -60px) rotate(-3deg) scale(0.95); opacity: 0.4; }
         }
 
+        /* ===== КАРТКА ===== */
         .card {
             position: relative;
             z-index: 2;
             max-width: 400px;
             width: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(4px);
             border-radius: 48px;
             padding: 30px 24px 24px;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 0 2px rgba(255, 100, 50, 0.2);
             border: 1px solid rgba(255, 100, 50, 0.15);
             text-align: center;
-            background-image: url('https://gannibal2009.github.io/Gitar-gannibal.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
             min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow: hidden; /* Важливо, щоб відео не виходило за заокруглені кути */
+        }
+
+        /* ===== ФОНОВЕ ВІДЕО ===== */
+        #bgVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Відео заповнює всю картку */
+            z-index: -1; /* Позаду всього контенту */
+            border-radius: 48px; /* Підлаштовується під картку */
         }
 
         .avatar-placeholder { height: 40px; flex-shrink: 0; }
@@ -246,7 +256,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* ===== НОВА КНОПКА YOUTUBE ===== */
         .btn-yt {
             color: #ffffff;
             text-shadow: 0 0 20px rgba(255, 50, 50, 0.2), 0 0 0 2px #ff0000;
@@ -266,6 +275,9 @@
                 padding: 20px 14px 16px;
                 border-radius: 32px;
                 min-height: 80vh;
+            }
+            #bgVideo {
+                border-radius: 32px;
             }
             .fire-text { font-size: 28px; }
             .sub { font-size: 14px; }
@@ -295,10 +307,18 @@
         <div class="fire-icon">🔥</div>
     </div>
 
+    <!-- ===== КАРТКА ===== -->
     <div class="card">
+
+        <!-- ===== ФОНОВЕ ВІДЕО (ЗАМІСТЬ КАРТИНКИ) ===== -->
+        <video autoplay muted loop playsinline id="bgVideo">
+            <source src="fire-guitar.mp4" type="video/mp4">
+            Ваш браузер не підтримує фонове відео.
+        </video>
+
         <div class="avatar-placeholder"></div>
         <div class="fire-text">Gannibal Trading</div>
-        <div class="sub">Rock Fan · Bootlegs collector</div>
+        <div class="sub">Rock Fan · Record Collector</div>
         <div class="divider">
             <span class="divider-line"></span>
             <span class="divider-icon">✦</span>
@@ -306,23 +326,14 @@
         </div>
 
         <div class="btn-group">
-            <!-- КНОПКА КАТАЛОГ -->
             <a href="https://docs.google.com/spreadsheets/d/1b8wUNhlKo8arsSiXPvMlN1110AHAv5og/preview" class="btn" target="_blank">View Catalog</a>
-
-            <!-- КНОПКА YOUTUBE -->
             <a href="https://www.youtube.com/@gannibal2009" class="btn btn-yt" target="_blank">YouTube</a>
-
             <div class="spacer"></div>
-
-            <!-- КНОПКА TELEGRAM -->
-            <a href="https://t.me/Gannibal2009" class="btn btn-tg" target="_blank">Telegram</a>
-
-            <!-- КНОПКА EMAIL -->
+            <a href="https://t.me/Gannibal2009" class="btn btn-tg" target="_blank">My Telegram</a>
             <div class="email-wrapper">
                 <button class="btn-email" id="emailBtn">Email</button>
                 <span class="copy-toast" id="emailToast">📋 Copied!</span>
             </div>
-
         </div>
     </div>
 
