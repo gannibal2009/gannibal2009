@@ -91,16 +91,17 @@
             overflow: hidden;
         }
 
-        /* ===== ВІДЕО (ТЕПЕР CONTAIN) ===== */
+        /* ===== ФОНОВЕ ВІДЕО З ЧОРНИМ ФОНОМ ===== */
         #bgVideo {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* ГІТАРА ВИДНА ПОВНІСТЮ */
+            object-fit: contain;
             z-index: -1;
             border-radius: 48px;
+            background-color: #000000; /* ЧОРНИЙ ФОН ЗАМІСТЬ ПРОЗОРОГО */
         }
 
         .avatar-placeholder { height: 40px; flex-shrink: 0; }
@@ -307,7 +308,7 @@
     </div>
 
     <div class="card">
-        <!-- ФОНОВЕ ВІДЕО -->
+        <!-- ===== ФОНОВЕ ВІДЕО ===== -->
         <video autoplay muted loop playsinline id="bgVideo">
             <source src="fire-guitar.mp4" type="video/mp4">
             Ваш браузер не підтримує фонове відео.
